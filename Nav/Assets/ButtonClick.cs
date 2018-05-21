@@ -25,6 +25,7 @@ public class ButtonClick : MonoBehaviour
     public GameObject Hamburger_menu;
     public GameObject createPath_menu;
 
+    bool Generated = false;
     void Start()
     {
 
@@ -44,14 +45,27 @@ public class ButtonClick : MonoBehaviour
         floorTxt.text = "Ground Floor";
      
 
+
+
+
+
+
+
+
     }
 
     void TaskOnClickGenerate()
     {
+        
         GridManager.GetComponent<BoardCreator>().GenerateMapData();
 
         GridManager.GetComponent<BoardCreator>().GeneratePathfindingGraph();
         GridManager.GetComponent<BoardCreator>().Setup();
+        if (Generated == false)
+        {
+            GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
+            Generated = true;
+        }
 
     }
 

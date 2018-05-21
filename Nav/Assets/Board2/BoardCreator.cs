@@ -27,7 +27,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject end;
     int currLocationx;
     int currLocationy;
-
+    bool G = false;
     public LineRenderer drawPath;
 
     public static BoardCreator instance = null;             //Static instance of GameManager which allows it to be accessed by any other script.
@@ -38,7 +38,7 @@ public class BoardCreator : MonoBehaviour
     public Player p;
     private void Start()
     {
-        boardHolder = new GameObject("BoardHolder");
+       
         Setup();
         //player.GetComponent<Unit>().map = this;
 
@@ -58,6 +58,7 @@ public class BoardCreator : MonoBehaviour
 
     public void Setup()
     {
+        
         mySprite = TafeSAMap.GetComponent<SpriteRenderer>().sprite;
         myTexture = mySprite.texture;
 
@@ -97,6 +98,8 @@ public class BoardCreator : MonoBehaviour
             drawPath.SetPosition(i, new Vector3(p.currentPath[i].x, player.GetComponent<Player>().currentPath[i].y, 0));
         }
 
+
+
       
     }
 
@@ -127,7 +130,7 @@ public class BoardCreator : MonoBehaviour
             {
                 TileType tt = tileTypes[tiles[x, y]];
                 tt.tileVisualPrefab.GetComponent<SpriteRenderer>().color = myTexture.GetPixel(Mathf.RoundToInt(x * pixel2units / 2), Mathf.RoundToInt(y * pixel2units / 2));
-                if (System.Math.Round(tt.tileVisualPrefab.GetComponent<SpriteRenderer>().color.r, 3) <= 0.790)
+                if (System.Math.Round(tt.tileVisualPrefab.GetComponent<SpriteRenderer>().color.r, 3) <= 0.750)
                 {
                     tiles[x, y] = 1;
 
@@ -141,7 +144,7 @@ public class BoardCreator : MonoBehaviour
 
     }
 
-    void GenerateMapVisual()
+    public void GenerateMapVisual()
     {
 
         float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;
@@ -150,12 +153,18 @@ public class BoardCreator : MonoBehaviour
         {
             for (int y = 0; y < rows; y++)
             {
-            
+               
+             
                 TileType tt = tileTypes[tiles[x, y]];
                 if (!tt.isWalkable)
                 {
-                    GameObject go = (GameObject)Instantiate(tt.tileVisualPrefab, new Vector3(x, y, 0), Quaternion.identity);
+                    
+                }
+                else
+                {
+                    GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
                     go.transform.parent = gameObject.transform;
+                    go.name = "x = " + x + " y = " +y;
                 }
 
 
@@ -381,7 +390,7 @@ public class BoardCreator : MonoBehaviour
         for (int i = 0; i < currentPath.Count; i++)
         {
             //Debug.Log(currentPath[i].x + " - " + currentPath[i].y);
-         //   Debug.DrawLine(new Vector3(currentPath[i].x, currentPath[i + 1].y, -1), new Vector3(currentPath[i + 1].x, currentPath[i + 1].y, -1), Color.green);
+        // Debug.DrawLine(new Vector3(currentPath[i].x, currentPath[i + 1].y, -1), new Vector3(currentPath[i + 1].x, currentPath[i + 1].y, -1), Color.green);
         }
         //GameObject.FindGameObjectWithTag ("Player").GetComponent<Unit> ().currentPath = currentPath;
 
