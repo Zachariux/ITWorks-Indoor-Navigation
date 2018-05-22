@@ -91,9 +91,9 @@
     <Compile Include="Assets\GlobalControl.cs" />
     <Compile Include="Assets\menu_burger_btn.cs" />
     <Compile Include="Assets\MoveCamera.cs" />
-    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\Room.cs" />
+    <Compile Include="Assets\Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

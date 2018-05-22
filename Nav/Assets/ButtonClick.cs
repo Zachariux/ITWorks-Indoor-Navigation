@@ -10,37 +10,61 @@ public class ButtonClick : MonoBehaviour
     public Button mapDown;
     public Button hamburger;
     public Button hamburgerClose;
-    public Button hamburgerClose2;
+
     public Button createPath;
     public Button generatePath;
+    public Button settings;
+
+
+    public Button back_path;
+    public Button back_settings;
 
     public GameObject GridManager;
 
-    public GameObject Map;
+    public GameObject Map_nosign;
+    public GameObject Map_signed;
+
     public int mapFloor = 1;
-    public SpriteRenderer spriteR;
-    public Sprite[] sprites;
+
+    public SpriteRenderer spriteNoSign;
+    public SpriteRenderer spriteSigned;
+    public Sprite[] sprites_nosign;
+    public Sprite[] sprites_signed;
     public Text floorTxt;
+    public Text menu_text;
 
     public GameObject Hamburger_menu;
     public GameObject createPath_menu;
-
+    public GameObject Settings_menu;
     bool Generated = false;
+
+    public LineRenderer Path;
+
     void Start()
     {
 
-
+        GlobalControl.FloorLevel = GlobalControl.Floors.G;
         Hamburger_menu.SetActive(false);
         createPath_menu.SetActive(false);
-        spriteR = Map.GetComponent<SpriteRenderer>();
+        Settings_menu.SetActive(false);
+
+        spriteNoSign = Map_nosign.GetComponent<SpriteRenderer>();
+        spriteSigned = Map_signed.GetComponent<SpriteRenderer>();
+
         mapUp.onClick.AddListener(TaskOnClickUp);
         mapDown.onClick.AddListener(TaskOnClickDown);
         
         createPath.onClick.AddListener(TaskOnClickCreatePath);
         hamburger.onClick.AddListener(TaskOnClickHamburger);
         hamburgerClose.onClick.AddListener(TaskOnClickHamburgerClose);
-        hamburgerClose2.onClick.AddListener(TaskOnClickHamburgerClose2);
+
+  
         generatePath.onClick.AddListener(TaskOnClickGenerate);
+        settings.onClick.AddListener(TaskOnClickSettingsMenu);
+
+
+        back_path.onClick.AddListener(TaskOnClickBackPath);
+        back_settings.onClick.AddListener(TaskOnClickBackSettings);
 
         floorTxt.text = "Ground Floor";
      
@@ -57,10 +81,8 @@ public class ButtonClick : MonoBehaviour
     void TaskOnClickGenerate()
     {
         
-        GridManager.GetComponent<BoardCreator>().GenerateMapData();
-
-        GridManager.GetComponent<BoardCreator>().GeneratePathfindingGraph();
-        GridManager.GetComponent<BoardCreator>().Setup();
+        GridManager.GetComponent<BoardCreator>().CreatePath();
+        
         if (Generated == false)
         {
             GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
@@ -69,12 +91,33 @@ public class ButtonClick : MonoBehaviour
 
     }
 
+
+    void TaskOnClickSettingsMenu()
+    {
+        Settings_menu.SetActive(true);
+        menu_text.text = "Settings";
+    }
+
+    void TaskOnClickBackPath()
+    {
+        createPath_menu.SetActive(false);
+        menu_text.text = "Menu";
+    }
+    void TaskOnClickBackSettings()
+    {
+        Settings_menu.SetActive(false);
+        menu_text.text = "Menu";
+    }
+
     void TaskOnClickUp()
     {
+
         if (mapFloor < 5)
         {
             mapFloor++;
-            spriteR.sprite = sprites[mapFloor];
+            spriteNoSign.sprite = sprites_nosign[mapFloor];
+            spriteSigned.sprite = sprites_signed[mapFloor];
+
             FloorText();
         }
     }
@@ -82,6 +125,7 @@ public class ButtonClick : MonoBehaviour
     void TaskOnClickCreatePath()
     {
         createPath_menu.SetActive(true);
+        menu_text.text = "Path Creator";
     }
 
     void TaskOnClickDown()
@@ -89,25 +133,32 @@ public class ButtonClick : MonoBehaviour
         if (mapFloor > 0)
         {
             mapFloor--;
-            spriteR.sprite = sprites[mapFloor];
+            spriteNoSign.sprite = sprites_nosign[mapFloor];
+            spriteSigned.sprite = sprites_signed[mapFloor];
             FloorText();
+
+
+
         }
     }
 
     void TaskOnClickHamburger()
     {
         Hamburger_menu.SetActive(true);
+        menu_text.text = "Menu";
+
+
+
     }
     void TaskOnClickHamburgerClose()
     {
         Hamburger_menu.SetActive(false);
+        createPath_menu.SetActive(false);
+        Settings_menu.SetActive(false);
+        menu_text.text = "Menu";
     }
 
-    void TaskOnClickHamburgerClose2()
-    {
-        Hamburger_menu.SetActive(false);
-        createPath_menu.SetActive(false);
-    }
+  
 
 
     void FloorText()
@@ -116,21 +167,27 @@ public class ButtonClick : MonoBehaviour
         {
             case 5:
                 floorTxt.text = "4F";
+                GlobalControl.FloorLevel = GlobalControl.Floors.F4;
                 break;
             case 4:
                 floorTxt.text = "3F";
+                GlobalControl.FloorLevel = GlobalControl.Floors.F3;
                 break;
             case 3:
                 floorTxt.text = "2F";
+                GlobalControl.FloorLevel = GlobalControl.Floors.F2;
                 break;
             case 2:
                 floorTxt.text = "1F";
+                GlobalControl.FloorLevel = GlobalControl.Floors.F1;
                 break;
             case 1:
                 floorTxt.text = "Ground Floor";
+                GlobalControl.FloorLevel = GlobalControl.Floors.G;
                 break;
             default:
                 floorTxt.text = "Basement";
+                GlobalControl.FloorLevel = GlobalControl.Floors.B;
                 break;
         }
     }

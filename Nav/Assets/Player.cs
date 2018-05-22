@@ -17,8 +17,14 @@ public class Player : MonoBehaviour
     public int DestinationX;
     public int DestinationY;
 
+    public List<Node> currentPath;
+    public List<Node> currentPathB;
+    public List<Node> currentPathG;
+    public List<Node> currentPath1F;
+    public List<Node> currentPath2F;
+    public List<Node> currentPath3F;
+    public List<Node> currentPath4F;
 
-    public List<Node> currentPath = null;
     public BoardCreator map;
     Vector3 startPos;
     Vector3 endPos;
@@ -33,30 +39,5 @@ public class Player : MonoBehaviour
         return new Vector3(x, y, 0);
     } 
 
-    public void calcPath()
-    {
-        map.GeneratePathTo((int)DestinationX, (int)DestinationY,this.gameObject);
-        if (currentPath != null)
-        {
-
-            int currNode = 0;
-
-            while (currNode < currentPath.Count - 1)
-            {
-
-                Vector3 start = TileCoordToWorldCoord(currentPath[currNode].x, currentPath[currNode].y) +
-                    new Vector3(0, 0, -1f);
-                Vector3 end = TileCoordToWorldCoord(currentPath[currNode + 1].x, currentPath[currNode + 1].y) +
-                    new Vector3(0, 0, -1f);
-
-                Debug.DrawLine(start, end, Color.blue);
-
-                currNode++;
-
-
-
-            }
-        }
-
-    }
+   
 }

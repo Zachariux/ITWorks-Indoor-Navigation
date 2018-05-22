@@ -16,7 +16,7 @@ public class DropDown : MonoBehaviour {
     public Dropdown ClassA_dropd;
     public Dropdown ClassB_dropd;
 
-    public List<room> rooms = new List<room>();
+    public List<Room> rooms = new List<Room>();
 
     
     List<string> m_DropOptions = new List<string> { };
