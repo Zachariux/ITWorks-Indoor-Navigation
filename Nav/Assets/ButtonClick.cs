@@ -81,14 +81,14 @@ public class ButtonClick : MonoBehaviour
     void TaskOnClickGenerate()
     {
         
-        GridManager.GetComponent<BoardCreator>().CreatePath();
-        
+       
+           GridManager.GetComponent<BoardCreator>().CreatePath();
         if (Generated == false)
         {
-            GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
+          //  GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
             Generated = true;
-        }
 
+        }
     }
 
 
@@ -119,6 +119,7 @@ public class ButtonClick : MonoBehaviour
             spriteSigned.sprite = sprites_signed[mapFloor];
 
             FloorText();
+            
         }
     }
 

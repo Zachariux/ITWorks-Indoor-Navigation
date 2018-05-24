@@ -3722,6 +3722,80 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!1 &975930782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 975930783}
+  - component: {fileID: 975930785}
+  - component: {fileID: 975930784}
+  m_Layer: 5
+  m_Name: Error
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &975930783
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975930782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1986629964}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 59, y: 22}
+  m_SizeDelta: {x: 1520.4, y: 417.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &975930784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975930782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 89
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 89
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Marker must be on pathable terrain.
+--- !u!222 &975930785
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975930782}
 --- !u!1 &990099966
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,7 +5159,8 @@ MonoBehaviour:
   yPosRounded: 0
   DestinationX: 0
   DestinationY: 0
-  map: {fileID: 0}
+  DestxPosRounded: 0
+  DestyPosRounded: 0
 --- !u!114 &1381613356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7478,9 +7553,10 @@ MonoBehaviour:
   end: {fileID: 2052820722}
   drawPath: {fileID: 0}
   TafeSAMap: {fileID: 1730930298}
-  p: {fileID: 0}
+  PointPositions: {fileID: 0}
   Up: {fileID: 2136229287}
   Down: {fileID: 319666232}
+  Error: {fileID: 975930784}
 --- !u!1 &1935099567
 GameObject:
   m_ObjectHideFlags: 0
@@ -7780,6 +7856,7 @@ RectTransform:
   - {fileID: 2073019209}
   - {fileID: 1663538294}
   - {fileID: 206430259}
+  - {fileID: 975930783}
   m_Father: {fileID: 1259105248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

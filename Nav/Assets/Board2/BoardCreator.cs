@@ -32,6 +32,9 @@ public class BoardCreator : MonoBehaviour
     int currLocationx;
     int currLocationy;
 
+    int destinationY;
+    int destinationX;
+
     public LineRenderer drawPath;
 
     public static BoardCreator instance = null;             //Static instance of GameManager which allows it to be accessed by any other script.
@@ -39,15 +42,15 @@ public class BoardCreator : MonoBehaviour
     public GameObject TafeSAMap;
     private Texture2D myTexture;
     private Sprite mySprite;
-    public Player p;
+    public Player PointPositions;
 
     public Button Up;
     public Button Down;
 
-    
+    public Text Error;
 
 
-
+    public static List<Node> currentPath;
     public static List<Node> currentPathB;
     public static List<Node> currentPathG;
     public static List<Node> currentPath1F;
@@ -57,10 +60,11 @@ public class BoardCreator : MonoBehaviour
 
     private void Start()
     {
+        Error.gameObject.SetActive(false);
         Up.onClick.AddListener(TaskOnClickUp);
         Down.onClick.AddListener(TaskOnClickDown);
         Setup();
-        p = start.GetComponent<Player>();
+        PointPositions = start.GetComponent<Player>();
     
     }
 
@@ -73,16 +77,6 @@ public class BoardCreator : MonoBehaviour
 
 
         DrawCurrentFloorPath();
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -106,9 +100,31 @@ public class BoardCreator : MonoBehaviour
 
     public void CreatePath()
     {
-        GenerateMapData();
-        GeneratePathfindingGraph();
-        Setup();
+    Setup();
+    GeneratePathfindingGraph();
+    GenerateMapData();
+        Error.gameObject.SetActive(false);
+
+        if (UnitCanEnterTile(PointPositions.DestinationX, PointPositions.DestinationY) == false)
+        {
+            // Make sure markers are over walkable paths
+            Debug.Log("ERROR");
+            Error.gameObject.SetActive(true);
+            Error.color = Color.blue;
+            return;
+        }
+        if (UnitCanEnterTile(PointPositions.xPosRounded, PointPositions.yPosRounded) == false)
+        {
+            // Make sure markers are over walkable paths
+            Debug.Log("ERROR");
+            Error.gameObject.SetActive(true);
+            Error.color = Color.red;
+            return;
+        }
+
+
+
+        DrawMap();
 
     }
 
@@ -120,48 +136,50 @@ public class BoardCreator : MonoBehaviour
         myTexture = mySprite.texture;
 
 
-        instance = this;
+     
 
 
 
         //Get starting pointer position and rounds it to closest node
 
-        p = start.GetComponent<Player>();
+        PointPositions = start.GetComponent<Player>();
         currLocationx = Mathf.RoundToInt(start.transform.position.x);
         currLocationy = Mathf.RoundToInt(start.transform.position.y);
-        p.xPosRounded = currLocationx;
-        p.yPosRounded = currLocationy;
 
+        destinationX = Mathf.RoundToInt(end.transform.position.x);
+        destinationY = Mathf.RoundToInt(end.transform.position.y);
 
+        PointPositions.xPosRounded = currLocationx;
+        PointPositions.yPosRounded = currLocationy;
 
-        p.map = this;
+        PointPositions.DestxPosRounded = destinationX;
+        PointPositions.DestyPosRounded = destinationY;
+
+        PointPositions.DestinationX = Mathf.RoundToInt(end.transform.position.x);
+        PointPositions.DestinationY = Mathf.RoundToInt(end.transform.position.y);
+
        
-      
-
-        p.DestinationX = Mathf.RoundToInt(end.transform.position.x);
-        p.DestinationY = Mathf.RoundToInt(end.transform.position.y);
 
 
 
-
-        DrawMap();
 
     }
 
 
     public void DrawMap()
     {
-GeneratePathTo(p.DestinationX, p.DestinationY, p.gameObject);
+
+        GeneratePathTo(PointPositions.DestinationX, PointPositions.DestinationY, PointPositions.gameObject);
         
 
         //Draw path using line renderer
         drawPath = GetComponent<LineRenderer>();
-        int currentPathCount = (p.currentPath.Count);
+        int currentPathCount = (PointPositions.currentPath.Count);
         drawPath.positionCount = currentPathCount;
 
         for (int i = 0; i < currentPathCount; i++)
         {
-            drawPath.SetPosition(i, new Vector3(p.currentPath[i].x, start.GetComponent<Player>().currentPath[i].y, 0));
+            drawPath.SetPosition(i, new Vector3(PointPositions.currentPath[i].x, start.GetComponent<Player>().currentPath[i].y, 0));
         }
     }
 
@@ -209,6 +227,9 @@ GeneratePathTo(p.DestinationX, p.DestinationY, p.gameObject);
 
     public void GenerateMapVisual()
     {
+        GameObject objToSpawn;
+
+        objToSpawn = new GameObject("Visual of nodes");
 
         //  float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;
 
@@ -225,9 +246,11 @@ GeneratePathTo(p.DestinationX, p.DestinationY, p.gameObject);
                 }
                 else
                 {
-              //   GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
-               //   go.transform.parent = gameObject.transform;
-             //     go.name = "x = " + x + " y = " + y;
+        //    GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
+         
+         //          
+             //       go.transform.parent = objToSpawn.transform;
+            //        go.name = "x = " + x + " y = " + y;
                 }
 
 
@@ -361,6 +384,7 @@ GeneratePathTo(p.DestinationX, p.DestinationY, p.gameObject);
         if (UnitCanEnterTile(x, y) == false)
         {
             // We probably clicked on a mountain or something, so just quit out.
+            Debug.Log("ERROR");
             return;
         }
 
@@ -438,10 +462,11 @@ GeneratePathTo(p.DestinationX, p.DestinationY, p.gameObject);
         }
 
 
+        currentPath = new List<Node>();
 
-    List<Node> currentPath = new List<Node>();
+  
 
-    currentPath.Clear();
+ 
         Node curr = target;
 
         // Step through the "prev" chain and add it to our path

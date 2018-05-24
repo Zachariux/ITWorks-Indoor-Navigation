@@ -17,17 +17,12 @@ public class Player : MonoBehaviour
     public int DestinationX;
     public int DestinationY;
 
-    public List<Node> currentPath;
-    public List<Node> currentPathB;
-    public List<Node> currentPathG;
-    public List<Node> currentPath1F;
-    public List<Node> currentPath2F;
-    public List<Node> currentPath3F;
-    public List<Node> currentPath4F;
+    public int DestxPosRounded = 0;
+    public int DestyPosRounded = 0;
 
-    public BoardCreator map;
-    Vector3 startPos;
-    Vector3 endPos;
+    public List<Node> currentPath;
+  
+
 
     public void positionRoundToInt()
     {
