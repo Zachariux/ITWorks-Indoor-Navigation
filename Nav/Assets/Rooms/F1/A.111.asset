@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c3b38340b64fa4c859bb4ecbc678e2, type: 3}
   m_Name: A.111
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  roomName: 
-  floor: 0
+  x: 80
+  y: 19
+  roomName: A.111
+  floor: 2
