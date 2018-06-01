@@ -16,13 +16,23 @@ public class DropDown : MonoBehaviour {
     public Dropdown ClassA_dropd;
     public Dropdown ClassB_dropd;
 
-    public List<Room> rooms = new List<Room>();
+    public List<Room> basementRooms = new List<Room>();
+    public List<Room> groundRooms = new List<Room>();
+    public List<Room> F1rooms = new List<Room>();
+    public List<Room> F2rooms = new List<Room>();
+    public List<Room> F3rooms = new List<Room>();
+    public List<Room> F4rooms = new List<Room>();
 
-    
-    List<string> m_DropOptions = new List<string> { };
+
+    List<string> basement_DropOptions = new List<string> { };
+    List<string> ground_DropOptions = new List<string> { };
+    List<string> F1_DropOptions = new List<string> { };
+    List<string> F2_DropOptions = new List<string> { };
+    List<string> F3_DropOptions = new List<string> { };
+    List<string> F4_DropOptions = new List<string> { };
 
 
-    
+
 
 
     public GameObject Start1;
@@ -36,13 +46,36 @@ public class DropDown : MonoBehaviour {
      //  GClasses.AddRange(GClass_var.Where((s, i) => i < GClass_var.Length).ToList());
 
 
-        for (int i = 0; i < rooms.Count; i ++)
+        for (int i = 0; i < basementRooms.Count; i ++)
         {
-            m_DropOptions.Add(rooms[i].name);
+            basement_DropOptions.Add(basementRooms[i].name);
         }
 
+        for (int i = 0; i < groundRooms.Count; i++)
+        {
+            ground_DropOptions.Add(groundRooms[i].name);
+        }
 
+        for (int i = 0; i < F1rooms.Count; i++)
+        {
+            F1_DropOptions.Add(F1rooms[i].name);
+        }
 
+        for (int i = 0; i < F2rooms.Count; i++)
+        {
+            F2_DropOptions.Add(F2rooms[i].name);
+        }
+
+        for (int i = 0; i < F3rooms.Count; i++)
+        {
+            F3_DropOptions.Add(F3rooms[i].name);
+        }
+        for (int i = 0; i < F4rooms.Count; i++)
+        {
+            F4_DropOptions.Add(F4rooms[i].name);
+        }
+
+     
         FloorA_dropd = FloorA.GetComponent<Dropdown>();
         FloorB_dropd = FloorB.GetComponent<Dropdown>();
         ClassA_dropd = ClassA.GetComponent<Dropdown>();
@@ -64,7 +97,13 @@ public class DropDown : MonoBehaviour {
         ClassB_dropd.onValueChanged.AddListener(delegate {
             ClassBDropdownValueChanged(ClassB_dropd);
         });
+        ClassA_dropd.ClearOptions();
+        ClassB_dropd.ClearOptions();
+        ClassA_dropd.AddOptions(ground_DropOptions);
+        ClassB_dropd.AddOptions(ground_DropOptions);
 
+        FloorA_dropd.value = 1;
+        FloorB_dropd.value = 1;
     }
 
     // Update is called once per frame
@@ -81,9 +120,33 @@ public class DropDown : MonoBehaviour {
     void FloorADropdownValueChanged(Dropdown change)
     {
         ClassA_dropd.ClearOptions();
-        if (FloorA_dropd.value == 1)
+        switch (FloorA_dropd.value)
         {
-            ClassA_dropd.AddOptions(m_DropOptions);
+            case 0:
+                //Basement
+                ClassA_dropd.AddOptions(basement_DropOptions);
+                break;
+            case 1:
+                //Ground Floor
+                ClassA_dropd.AddOptions(ground_DropOptions);
+                break;
+            case 2:
+                //1F
+                ClassA_dropd.AddOptions(F1_DropOptions);
+                break;
+            case 3:
+                //2F
+                ClassA_dropd.AddOptions(F2_DropOptions);
+                break;
+            case 4:
+                //3F
+                ClassA_dropd.AddOptions(F3_DropOptions);
+                break;
+            case 5:
+                //4F
+                ClassA_dropd.AddOptions(F4_DropOptions);
+                break;
+
         }
     }
 
@@ -93,10 +156,35 @@ public class DropDown : MonoBehaviour {
 
     void ClassADropdownValueChanged(Dropdown change)
     {
-      
-        Start1.transform.position = new Vector3(rooms[ClassA_dropd.value].x, rooms[ClassA_dropd.value].y, 0);
 
+        switch (FloorA_dropd.value)
+        {
+            case 0:
+                //Basement
+                Start1.transform.position = new Vector3(basementRooms[ClassA_dropd.value].x, basementRooms[ClassA_dropd.value].y, 0);
+                break;
+            case 1:
+                //Ground Floor
+                Start1.transform.position = new Vector3(groundRooms[ClassA_dropd.value].x, groundRooms[ClassA_dropd.value].y, 0);
+                break;
+            case 2:
+                //1F
+                Start1.transform.position = new Vector3(F1rooms[ClassA_dropd.value].x, F1rooms[ClassA_dropd.value].y, 0);
+                break;
+            case 3:
+                //2F
+                Start1.transform.position = new Vector3(F2rooms[ClassA_dropd.value].x, F2rooms[ClassA_dropd.value].y, 0);
+                break;
+            case 4:
+                //3F
+                Start1.transform.position = new Vector3(F3rooms[ClassA_dropd.value].x, F3rooms[ClassA_dropd.value].y, 0);
+                break;
+            case 5:
+                //4F
+                Start1.transform.position = new Vector3(F4rooms[ClassA_dropd.value].x, F4rooms[ClassA_dropd.value].y, 0);
+                break;
 
+        }
 
 
 
@@ -105,8 +193,35 @@ public class DropDown : MonoBehaviour {
     void ClassBDropdownValueChanged(Dropdown change)
     {
       
-        End1.transform.position = new Vector3(rooms[ClassB_dropd.value].x, rooms[ClassB_dropd.value].y, 0);
+      
+        switch (FloorB_dropd.value)
+        {
+            case 0:
+                //Basement
+                End1.transform.position = new Vector3(basementRooms[ClassB_dropd.value].x, basementRooms[ClassB_dropd.value].y, 0);
+                break;
+            case 1:
+                //Ground Floor
+                End1.transform.position = new Vector3(groundRooms[ClassB_dropd.value].x, groundRooms[ClassB_dropd.value].y, 0);
+                break;
+            case 2:
+                //1F
+                End1.transform.position = new Vector3(F1rooms[ClassB_dropd.value].x, F1rooms[ClassB_dropd.value].y, 0);
+                break;
+            case 3:
+                //2F
+                End1.transform.position = new Vector3(F2rooms[ClassB_dropd.value].x, F2rooms[ClassB_dropd.value].y, 0);
+                break;
+            case 4:
+                //3F
+                End1.transform.position = new Vector3(F3rooms[ClassB_dropd.value].x, F3rooms[ClassB_dropd.value].y, 0);
+                break;
+            case 5:
+                //4F
+                End1.transform.position = new Vector3(F4rooms[ClassB_dropd.value].x, F4rooms[ClassB_dropd.value].y, 0);
+                break;
 
+        }
 
 
 
@@ -118,10 +233,43 @@ public class DropDown : MonoBehaviour {
     void FloorBDropdownValueChanged(Dropdown change)
     {
         ClassB_dropd.ClearOptions();
-        if (FloorB_dropd.value == 1)
+      
+
+
+
+
+        switch (FloorB_dropd.value)
         {
-            ClassB_dropd.AddOptions(m_DropOptions);
+            case 0:
+                //Basement
+                ClassB_dropd.AddOptions(basement_DropOptions);
+                break;
+            case 1:
+                //Ground Floor
+                ClassB_dropd.AddOptions(ground_DropOptions);
+                break;
+            case 2:
+                //1F
+                ClassB_dropd.AddOptions(F1_DropOptions);
+                break;
+            case 3:
+                //2F
+                ClassB_dropd.AddOptions(F2_DropOptions);
+                break;
+            case 4:
+                //3F
+                ClassB_dropd.AddOptions(F3_DropOptions);
+                break;
+            case 5:
+                //4F
+                ClassB_dropd.AddOptions(F4_DropOptions);
+                break;
+
         }
+
+
+
+
     }
 
 }
