@@ -246,11 +246,11 @@ public class BoardCreator : MonoBehaviour
                 }
                 else
                 {
-        //    GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
+         GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
          
-         //          
-             //       go.transform.parent = objToSpawn.transform;
-            //        go.name = "x = " + x + " y = " + y;
+                  
+             go.transform.parent = objToSpawn.transform;
+               go.name = "x = " + x + " y = " + y;
                 }
 
 

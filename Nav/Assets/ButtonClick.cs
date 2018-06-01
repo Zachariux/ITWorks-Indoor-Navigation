@@ -85,7 +85,7 @@ public class ButtonClick : MonoBehaviour
            GridManager.GetComponent<BoardCreator>().CreatePath();
         if (Generated == false)
         {
-          //  GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
+            GridManager.GetComponent<BoardCreator>().GenerateMapVisual();
             Generated = true;
 
         }
