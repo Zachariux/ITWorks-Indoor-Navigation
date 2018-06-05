@@ -15,3 +15,4 @@ MonoBehaviour:
   y: 21
   roomName: C.G07
   floor: 1
+  lift: 2

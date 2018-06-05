@@ -39,6 +39,7 @@ public class BoardCreator : MonoBehaviour
 
     public static BoardCreator instance = null;             //Static instance of GameManager which allows it to be accessed by any other script.
 
+
     public GameObject TafeSAMap;
     private Texture2D myTexture;
     private Sprite mySprite;
@@ -58,8 +59,14 @@ public class BoardCreator : MonoBehaviour
     public static List<Node> currentPath3F;
     public static List<Node> currentPath4F;
 
+    public GameObject DropdownControlHolder;
+    public DropDown DropdownControl;
+
+
+
     private void Start()
     {
+        DropdownControl = DropdownControlHolder.GetComponent<DropDown>();
         Error.gameObject.SetActive(false);
         Up.onClick.AddListener(TaskOnClickUp);
         Down.onClick.AddListener(TaskOnClickDown);
@@ -77,21 +84,25 @@ public class BoardCreator : MonoBehaviour
 
 
         DrawCurrentFloorPath();
-
+        DropdownControl.changeEndpos();
+        DropdownControl.changeStartpos();
 
 
         //Debug.Log("currentPathG" + currentPathG.ToArray().Length);
-     // Debug.Log("currentPathB"+currentPathB.ToArray().Length);
+        // Debug.Log("currentPathB"+currentPathB.ToArray().Length);
 
     }
     void TaskOnClickUp()
     {
+        
         if (drawPath != null)
         {
             drawPath.positionCount = 0;
         }
 
         DrawCurrentFloorPath();
+        DropdownControl.changeEndpos();
+        DropdownControl.changeStartpos();
 
 
     }
@@ -246,11 +257,11 @@ public class BoardCreator : MonoBehaviour
                 }
                 else
                 {
-         GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
+      //   GameObject go = (GameObject)Instantiate(floorTiles[0], new Vector3(x, y, 0), Quaternion.identity);
          
                   
-             go.transform.parent = objToSpawn.transform;
-               go.name = "x = " + x + " y = " + y;
+        //     go.transform.parent = objToSpawn.transform;
+          //     go.name = "x = " + x + " y = " + y;
                 }
 
 

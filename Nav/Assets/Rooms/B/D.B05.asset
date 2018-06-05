@@ -15,3 +15,4 @@ MonoBehaviour:
   y: 40
   roomName: D.B05
   floor: 0
+  lift: 3

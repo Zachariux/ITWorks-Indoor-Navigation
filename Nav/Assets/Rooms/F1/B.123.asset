@@ -15,3 +15,4 @@ MonoBehaviour:
   y: 43
   roomName: B.123
   floor: 2
+  lift: 1
