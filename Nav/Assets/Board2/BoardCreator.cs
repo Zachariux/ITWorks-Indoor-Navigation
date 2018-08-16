@@ -8,15 +8,6 @@ public class BoardCreator : MonoBehaviour
 {
     // The type of tile that will be laid in a specific position.
 
-    public enum Faces
-    {
-        Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft, Center, Floor
-    }
-
-
-   
-
-
     public int columns;                                 // The number of columns on the board (how wide it will be).
     public int rows;                                    // The number of rows on the board (how tall it will be).	
 
@@ -70,9 +61,8 @@ public class BoardCreator : MonoBehaviour
         Error.gameObject.SetActive(false);
         Up.onClick.AddListener(TaskOnClickUp);
         Down.onClick.AddListener(TaskOnClickDown);
-        Setup();
         PointPositions = start.GetComponent<Player>();
-    
+        Setup();
     }
 
     void TaskOnClickDown()

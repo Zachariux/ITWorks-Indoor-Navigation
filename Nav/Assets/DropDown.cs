@@ -129,6 +129,9 @@ public class DropDown : MonoBehaviour
         {
             ClassBDropdownValueChanged(ClassB_dropd);
         });
+
+   
+
         ClassA_dropd.ClearOptions();
         ClassB_dropd.ClearOptions();
         ClassA_dropd.AddOptions(ground_DropOptions);
@@ -137,17 +140,15 @@ public class DropDown : MonoBehaviour
         FloorA_dropd.value = 1;
         FloorB_dropd.value = 1;
 
-
-        Start1.transform.position = new Vector3(allRooms[1][ClassA_dropd.value].x, allRooms[1][ClassA_dropd.value].y, 0);
-        End1.transform.position = new Vector3(allRooms[1][ClassA_dropd.value].x, allRooms[1][ClassA_dropd.value].y, 0);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        //DropDown option selected when panel opens:
+        ClassA_dropd.value = ClassA_dropd.options.Count;
+        ClassB_dropd.value = 0;
+       Start1.transform.position = new Vector3(allRooms[1][ClassA_dropd.value].x, allRooms[1][ClassA_dropd.value].y, 0);
+       End1.transform.position = new Vector3(allRooms[1][ClassB_dropd.value].x, allRooms[1][ClassB_dropd.value].y, 0);
 
     }
+
+
 
     void UpdateDropDowns()
     {
