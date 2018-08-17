@@ -8,7 +8,10 @@ class DragDrop : MonoBehaviour
     private bool dragging = false;
     private float distance;
     public Camera mainCamera;
+    public GameObject Manager;
+    public LineRenderer path;
 
+ 
     void OnMouseEnter()
     {
       
@@ -26,6 +29,8 @@ class DragDrop : MonoBehaviour
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
         dragging = true;
         mainCamera.GetComponent<MoveCamera>().moveEnabled = false;
+        path.enabled = false;
+
     }
 
     void OnMouseUp()

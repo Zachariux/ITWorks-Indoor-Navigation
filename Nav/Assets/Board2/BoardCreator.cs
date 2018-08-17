@@ -20,6 +20,7 @@ public class BoardCreator : MonoBehaviour
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
     public GameObject start;
     public GameObject end;
+
     int currLocationx;
     int currLocationy;
 
@@ -57,12 +58,19 @@ public class BoardCreator : MonoBehaviour
 
     private void Start()
     {
+        Setup();
         DropdownControl = DropdownControlHolder.GetComponent<DropDown>();
         Error.gameObject.SetActive(false);
         Up.onClick.AddListener(TaskOnClickUp);
         Down.onClick.AddListener(TaskOnClickDown);
         PointPositions = start.GetComponent<Player>();
-        Setup();
+      
+    }
+
+
+    private void Update()
+    {
+      
     }
 
     void TaskOnClickDown()
@@ -171,10 +179,19 @@ public class BoardCreator : MonoBehaviour
     {
 
         GeneratePathTo(PointPositions.DestinationX, PointPositions.DestinationY, PointPositions.gameObject);
-        
+
 
         //Draw path using line renderer
+   
+        
+
+
         drawPath = GetComponent<LineRenderer>();
+
+             if (drawPath.enabled == false)
+        {
+            drawPath.enabled = true;
+        }
         int currentPathCount = (PointPositions.currentPath.Count);
         drawPath.positionCount = currentPathCount;
 
@@ -591,6 +608,8 @@ public class BoardCreator : MonoBehaviour
             {
                 drawPath.SetPosition(i, new Vector3(currentFloorPath[i].x, currentFloorPath[i].y, 0));
             }
+
+            
         }
     }
 
