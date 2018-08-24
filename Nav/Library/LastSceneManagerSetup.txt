@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Nav1.unity
+- path: Assets/QRcode.unity
   isLoaded: 1
   isActive: 1
