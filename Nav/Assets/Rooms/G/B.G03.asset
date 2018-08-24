@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c3b38340b64fa4c859bb4ecbc678e2, type: 3}
   m_Name: B.G03
   m_EditorClassIdentifier: 
-  x: 0
+  x: 65
   y: 46
   roomName: 59
   floor: 1
