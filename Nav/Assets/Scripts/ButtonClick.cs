@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using System;
 
 public class floorNavigationController : MonoBehaviour
 {
@@ -18,6 +18,9 @@ public class floorNavigationController : MonoBehaviour
 
     public Button back_path;
     public Button back_settings;
+
+
+    public Button QRScene_btn;
 
     public GameObject GridManager;
 
@@ -66,6 +69,8 @@ public class floorNavigationController : MonoBehaviour
         back_path.onClick.AddListener(TaskOnClickBackPath);
         back_settings.onClick.AddListener(TaskOnClickBackSettings);
 
+        QRScene_btn.onClick.AddListener(TaskOnClickQR);
+
         floorTxt.text = "Ground Floor";
      
 
@@ -76,6 +81,12 @@ public class floorNavigationController : MonoBehaviour
 
 
 
+    }
+
+    private void TaskOnClickQR()
+    {
+        Debug.Log("QR Click");
+        Application.LoadLevel(1);
     }
 
     void TaskOnClickGenerate()
@@ -97,6 +108,12 @@ public class floorNavigationController : MonoBehaviour
     {
         Settings_menu.SetActive(true);
         menu_text.text = "Settings";
+    }
+
+ 
+    void TaskOnClickQR(string sceneName)
+    {
+        
     }
 
     void TaskOnClickBackPath()

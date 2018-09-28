@@ -4,4 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Nav1.unity
+    guid: 96ea5a85bcba457429a5584b118b1981
+  - enabled: 1
+    path: Assets/QRcode.unity
+    guid: 1a7a595604d6e504da715be232d6ddeb
+  m_configObjects: {}

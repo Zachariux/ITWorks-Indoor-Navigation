@@ -142,26 +142,7 @@ public class DropDown : MonoBehaviour
 
         
         starting.Add("Select Floor");
-
-        FloorA_dropd.options.Clear();
-        FloorA_dropd.AddOptions(FloorOptions);
-
-        FloorB_dropd.options.Clear();
-        FloorB_dropd.AddOptions(FloorOptions);
-
-
-
-        FloorA_dropd.value = 6;
-        FloorB_dropd.value = 6;
-
-        FloorA_dropd.options.RemoveAt(FloorA_dropd.options.Count - 1);
-        FloorB_dropd.options.RemoveAt(FloorB_dropd.options.Count - 1);
-
-        ClassA_dropd.AddOptions(starting);
-        ClassA_dropd.options.RemoveAt(ClassA_dropd.options.Count - 1);
-
-        ClassB_dropd.AddOptions(starting);
-        ClassB_dropd.options.RemoveAt(ClassB_dropd.options.Count - 1);
+        ResetDropDowns();
 
 
     }
@@ -169,33 +150,10 @@ public class DropDown : MonoBehaviour
    public void ResetDropDowns()
     {
 
-        ClassA_dropd.options.Clear();
-
-        ClassB_dropd.options.Clear();
-
-        FloorA_dropd.options.Clear();
-        
-        FloorB_dropd.options.Clear();
-
-        FloorA_dropd.options.Clear();
-        FloorA_dropd.AddOptions(FloorOptions);
-
-        FloorB_dropd.options.Clear();
-        FloorB_dropd.AddOptions(FloorOptions);
-
-
-
         FloorA_dropd.value = 6;
         FloorB_dropd.value = 6;
 
-        FloorA_dropd.options.RemoveAt(FloorA_dropd.options.Count - 1);
-        FloorB_dropd.options.RemoveAt(FloorB_dropd.options.Count - 1);
-
-        ClassA_dropd.AddOptions(starting);
-        ClassA_dropd.options.RemoveAt(ClassA_dropd.options.Count - 1);
-
-        ClassB_dropd.AddOptions(starting);
-        ClassB_dropd.options.RemoveAt(ClassB_dropd.options.Count - 1);
+   
 
     }
 
